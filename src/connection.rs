@@ -54,8 +54,8 @@ impl Connection {
                 let stream = UnixStream::connect(url.path())?;
                 return Ok(Connection {
                     url: url.to_string(),
-                    protocol: Protocol::Binary(BinaryProtocol {
-                        stream: Stream::Unix(stream),
+                    protocol: Protocol::Ascii(AsciiProtocol {
+                        reader: BufReader::new(Stream::Unix(stream)),
                     }),
                 });
             }
